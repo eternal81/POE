@@ -4,6 +4,7 @@
  */
 package POE;
 
+import GUI.MyProps;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -27,9 +28,6 @@ public class poeThread {
     private Date dateLast;
     private String HTML;
     private ArrayList<POEDBItem> items;
-    private String[] Currencies = {
-        "ex", "chaos", "chrom", "gcp", "prism", "alt", "fus", "alch", "jewel", 
-        "chisel", "cart", "chance", "scour", "blessed", "divine", "regret", "regal"};
 
     public poeThread(String _threadID, Date _datePosted, String _user, Date _dateLast, String _HTML) {
         this.threadID = _threadID;
@@ -135,7 +133,7 @@ public class poeThread {
      * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
      *
      */
-    public void parseInnerHTML() {
+    public final void parseInnerHTML() {
         Document doc = Jsoup.parse(this.HTML);
         //update Buyouts for spoiler sections
         for (Element fe : doc.select("div.spoilertitle")) {
@@ -181,7 +179,7 @@ public class poeThread {
         //parse out the text "b/o" and just use what follows
         bo = bo.split("b/o")[1].toLowerCase();
         //make sure its a valid currency
-        for (String currency : this.Currencies) {
+        for (String currency : MyProps.getDefault().getCurrencies()) {
             if (bo.indexOf(currency) > 0) {
                 try {
                     //valid combination of b/o and a currency found... parse numeric value            

@@ -68,6 +68,7 @@ public class Parser {
                     Response r = conn.execute();
 
                     threads.add(new poeThread(threadID, datePosted, user, dateLast, r.body()));
+                    //System.out.println(threadID);
                 } catch (Exception ex) {
                     ex.printStackTrace();
                     System.out.println("sticky");

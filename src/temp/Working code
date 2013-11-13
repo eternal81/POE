@@ -1,0 +1,19 @@
+        SwingWorker<Boolean, Integer> worker = new SwingWorker<Boolean, Integer>() {
+            @Override
+            protected Boolean doInBackground() throws Exception {
+                while (!isCancelled()) {
+                    for (int i = 0; i <= 10; i++) {
+                        Thread.sleep(1000);
+                        publish(i);
+                    }
+                }
+                return true;
+            }
+
+            @Override
+            protected void process(List<Integer> chunks) {
+                int chunk = chunks.get(chunks.size()-1);
+                jStatusTable.getModel().setValueAt("At: " + chunk, 0, 0);
+            }
+        };
+        worker.execute();

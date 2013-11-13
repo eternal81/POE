@@ -4,6 +4,7 @@
  */
 package POE;
 
+import GUI.MyProps;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -18,52 +19,11 @@ public class DBHandler {
 
     private Connection conn = null;
     private Statement s = null;
-    String insertString = "REPLACE INTO Items "
-            + "(_ThreadID, "
-            + "_verified, "
-            + "_w, "
-            + "_h, "
-            + "_support, "
-            + "_league, "
-            + "_sockets, "
-            + "_name, "
-            + "_typeline, "
-            + "_identified, "
-            + "_pES, "
-            + "_pEV, "
-            + "_pAR, "
-            + "_pBL, "
-            + "_pQual, " //+ "_pName, "
-            + "_pPDam, " //4 - Fire
-            + "_pCDam, " //5 - Cold
-            + "_pFDam, " //6 - Lightning
-            + "_pLDam, " //+ "_pEDam, "
-            + "_pCrit, "
-            + "_pAPS, "
-            + "_rLevel, "
-            + "_rInt, "
-            + "_rDex, "
-            + "_rStr, "
-            + "_explicitMods, "
-            + "_implicitMods, "
-            + "_flavourtext, "
-            + "_frametype, "
-            + "_socketeditems,  "
-            + "_icon, "
-            + "_co, "
-            + "_bo, "
-            + "_itemID)"
-            + "VALUES ("
-            + "?,?,?,?,?,?,?,?,?,?," //10 per row
-            + "?,?,?,?,?,?,?,?,?,?,"
-            + "?,?,?,?,?,?,?,?,?,?,"
-            + "?,?,?,?)";
-
+    
     public DBHandler() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            conn = DriverManager.getConnection("jdbc:mysql://localhost/POE?"
-                    + "user=test&password=test");
+            conn = DriverManager.getConnection(MyProps.getDefault().getConnectionString());
             s = conn.createStatement();
 
         } catch (Exception e) {
@@ -100,7 +60,7 @@ public class DBHandler {
             clear.execute();
             
             for (POEDBItem item : items) {               
-                ps = conn.prepareStatement(insertString);
+                ps = conn.prepareStatement(MyProps.getDefault().getInsertString());
                 ps.setString(1, thread.getThreadID());
                 ps.setBoolean(2, item.getVerified());
                 ps.setInt(3, item.getW().intValue());
