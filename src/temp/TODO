@@ -1,0 +1,25 @@
+                    #Git rid of saving the full html to the mysql database (400+ MB of data being saved)
+
+#Change using a stored procedure to add threads to doing a REPLACE
+
+                    #condense fields being saved to database
+                            --no need for socketed items...
+                            --lookups for explicit mods (3rd table)
+
+#separate out saving to database and getting each thread's info to better update the jtable
+--redo sockets datatype... redundant dashes used
+--explicit/implicit mods in another single table.. use a boolean to specify implicit w/ default being explicit
+**be careful at the join order... make sure the joins go from smallest table (list of types of mods
+**to biggest table
+--create indexed table for icons (make sure to include parsing to minimize file size)
+
+#try using batch prepared statements again
+--http://stackoverflow.com/questions/1915166/how-to-get-the-insert-id-in-jdbc
+**ThreadID is not needed since that is based on the webpage
+--ItemID on the database is gotten from retreiving the identity... will 
+--  have to redesign database to use multiple tables
+
+                    #create mysqldump's of the tables
+                        --find size after zipping... maybe create downloadable datasets?
+
+#

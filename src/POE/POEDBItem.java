@@ -22,6 +22,7 @@ public class POEDBItem extends POEItem {
     }
 
     private int getIntRequirement(String key) {
+        //is this the best way?
         try {
             if (super.getRequirements() != null) {
                 Requirements[] r = super.getRequirements();
@@ -55,6 +56,7 @@ public class POEDBItem extends POEItem {
     }
 
     private int getIntProperty(String key) {
+        //is this the best way? Use REGEX?
         try {
         if (super.getProperties() != null) {
             for (Properties p : super.getProperties()) {
@@ -75,6 +77,7 @@ public class POEDBItem extends POEItem {
     }
 
     private BigDecimal getDecProperty(String key) {
+        //regex
         try {
         if (super.getProperties() != null) {
             for (Properties p : super.getProperties()) {
@@ -95,6 +98,7 @@ public class POEDBItem extends POEItem {
     }
 
     private String getStringProperty(String key) {
+        //regex??
         try {
         if (super.getProperties() != null) {
             for (Properties p : super.getProperties()) {
@@ -187,6 +191,7 @@ public class POEDBItem extends POEItem {
 
     public String getSocketString() {
         try {
+            //Change this to use an arraylist so there aren't so many unused dashes
             //shrink down socket colors and combos into a single value for the database
             String[] ret = {"", "", "", "", "", ""};
             if (this.getSockets() != null) {

@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import javax.swing.SwingWorker;
 import javax.swing.table.TableModel;
+import temp.TestWorker;
 
 /**
  *
@@ -143,12 +144,15 @@ public class GUIFrame extends javax.swing.JFrame {
     }
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        tw = new TableWorker();
-        tw.execute();
+        TestWorker t = new TestWorker( jStatusTable);
+        t.execute();
+        //handle all of the updates ext outside of the gui!!!
+//        tw = new TableWorker();
+//        tw.execute();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        tw.cancel(true);
+//        tw.cancel(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**

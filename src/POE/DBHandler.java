@@ -39,7 +39,7 @@ public class DBHandler {
             cs.setString(2, thread.getUser());
             cs.setString(3, convPoeDate(thread.getDatePosted()));
             cs.setString(4, convPoeDate(thread.getDateLast()));
-            cs.setString(5, thread.getHTML());
+            cs.setString(5, "");
 
             cs.executeUpdate();
 
@@ -90,11 +90,11 @@ public class DBHandler {
                 ps.setString(27, item.getImplicitModsAsString());
                 ps.setString(28, item.getFlavorTextAsString());
                 ps.setInt(29, item.getFrameType().intValue());
-                ps.setString(30, item.getSocketItemsAsString());
-                ps.setString(31, item.getIcon());
-                ps.setString(32, item.getCo());
-                ps.setString(33, item.getBo());
-                ps.setInt(34, item.getItemListID());
+                //ps.setString(30, item.getSocketItemsAsString());
+                ps.setString(30, item.getIcon());
+                ps.setString(31, item.getCo());
+                ps.setString(32, item.getBo());
+                ps.setInt(33, item.getItemListID());
                 ps.execute();
                 //ps.close();
             }

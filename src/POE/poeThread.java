@@ -26,7 +26,7 @@ public class poeThread {
     private Date datePosted;
     private String user;
     private Date dateLast;
-    private String HTML;
+    //private String HTML;
     private ArrayList<POEDBItem> items;
 
     public poeThread(String _threadID, Date _datePosted, String _user, Date _dateLast, String _HTML) {
@@ -34,7 +34,7 @@ public class poeThread {
         this.datePosted = _datePosted;
         this.user = _user;
         this.dateLast = _dateLast;
-        this.HTML = _HTML;
+        //this.HTML = _HTML;
         try {//pause 1 second between each thread download
             Thread.sleep(1000 * 1);
             //Logger.getLogger("MyInfo").info("Just Fine");
@@ -43,7 +43,7 @@ public class poeThread {
         }
         System.out.println(_threadID);
         parsePOEItems(_HTML);
-        parseInnerHTML();
+        parseInnerHTML(_HTML);
         new DBHandler().addThread(this);
     }
 
@@ -108,21 +108,6 @@ public class poeThread {
         } catch (Exception e) {
             LOGGER.log(Level.INFO, e.getMessage(), e.getStackTrace());
         }
-//            if (ihtml.toLowerCase().indexOf("c/o") > 0) {
-//                //next element (spoiler content) has all the children this price applies to
-//                Element ne = fe.nextElementSibling();
-//                for (Element element : ne.children()) {
-//                    if (element.attr("id").isEmpty()) {
-//                        // make sure we are only adding items and not user generated html
-//                        System.out.println("Empty id attr for thread: " + this.threadID);
-//                    } else {
-//                        //get the item id to update the item list
-//                        String ss = element.attr("id").replace("item-fragment-", "");
-//                        //update the appropriate item with the b/o                   
-//                        this.items.get(Integer.parseInt(ss)).setCo(ihtml);
-//                    }
-//                }
-//            }
 
     }
 
@@ -133,15 +118,15 @@ public class poeThread {
      * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
      *
      */
-    public final void parseInnerHTML() {
-        Document doc = Jsoup.parse(this.HTML);
+    public final void parseInnerHTML(String HTML) {
+        Document doc = Jsoup.parse(HTML);
         //update Buyouts for spoiler sections
         for (Element fe : doc.select("div.spoilertitle")) {
             processSpoiler(fe);
         }
         //Update Buyouts individually priced
         //Create a string array from all the itemfragments
-        String[] splits = this.HTML.split("<div class=\"itemFragment");
+        String[] splits = HTML.split("<div class=\"itemFragment");
         for (String s : splits) {
             //if there is buyout info specified in later <div>'s... they won't be valid
             String[] temp = s.split("</div>");
@@ -217,9 +202,6 @@ public class poeThread {
         return this.dateLast;
     }
 
-    public String getHTML() {
-        return this.HTML;
-    }
 
     /**
      * Adds items from the thread
