@@ -1,0 +1,8 @@
+#Git rid of saving the full html to the mysql database (400+ MB of data being saved)
+
+#condense fields being saved to database
+         --no need for socketed items...
+         --lookups for explicit mods (3rd table)
+
+#create mysqldump's of the tables
+        --find size after zipping... maybe create downloadable datasets?

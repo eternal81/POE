@@ -1,16 +1,12 @@
-                    #Git rid of saving the full html to the mysql database (400+ MB of data being saved)
 
 #Change using a stored procedure to add threads to doing a REPLACE
 
-                    #condense fields being saved to database
-                            --no need for socketed items...
-                            --lookups for explicit mods (3rd table)
-
+ 
 #separate out saving to database and getting each thread's info to better update the jtable
 --redo sockets datatype... redundant dashes used
 --explicit/implicit mods in another single table.. use a boolean to specify implicit w/ default being explicit
 **be careful at the join order... make sure the joins go from smallest table (list of types of mods
-**to biggest table
+**to biggest table... or does the optimizer do this for you??
 --create indexed table for icons (make sure to include parsing to minimize file size)
 
 #try using batch prepared statements again
@@ -19,7 +15,9 @@
 --ItemID on the database is gotten from retreiving the identity... will 
 --  have to redesign database to use multiple tables
 
-                    #create mysqldump's of the tables
-                        --find size after zipping... maybe create downloadable datasets?
+ 
+#Maybe Add field lastedited to the thread... problem lies in that this doesn't show in the league thread listing...
+#you have to actually pull the physical thread
 
-#
+#Adjust naming convention with typeline... base items + name will have a typeline
+#while items like gems simply have a typeline that would normally be a name

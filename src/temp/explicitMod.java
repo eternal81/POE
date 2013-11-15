@@ -38,7 +38,7 @@ public class explicitMod {
             int minstart = (Integer) vals.get(0)[1];
             int minstop = (Integer) vals.get(0)[2];
             //if there isn't a second numberic portion... use the first for max value
-            int maxstart = (Integer) vals.get(vals.size() - 1)[2];
+            int maxstart = (Integer) vals.get(vals.size() - 1)[1];
             int maxstop = (Integer) vals.get(vals.size() - 1)[2];
             valueMin = Integer.parseInt(input.substring(minstart, minstop));
             valueMax = Integer.parseInt(input.substring(maxstart, maxstop));
